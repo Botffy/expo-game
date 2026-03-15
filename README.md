@@ -6,6 +6,28 @@ The player coordinates the flow of food from the kitchen to the dining room duri
 
 In case you're wondering, all this is inspired by the TV series "The Bear".
 
+## Building and running
+
+**Prerequisites:** JDK 21+. Gradle wrapper is included.
+
+**Run the app:**
+```
+.\gradlew.bat run
+```
+
+**Compile:**
+```
+.\gradlew.bat compileKotlin
+```
+
+**Package a native Windows executable:**
+```
+.\gradlew.bat packageExe
+```
+The `.exe` will be placed under `build/compose/binaries/`.
+
+---
+
 ## Core idea
 
 The player acts as the **expeditor (expo)**: the person standing at the _pass_ who coordinates communication between the **front of house** (FoH; the waitstaff in the dining room) and the **back of house** (BoH; the kitchen staff).
