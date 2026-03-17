@@ -3,6 +3,7 @@ package hu.sarmin.expo.simulation
 import hu.sarmin.expo.model.Dish
 import hu.sarmin.expo.model.DishType
 import hu.sarmin.expo.model.Menu
+import io.github.oshai.kotlinlogging.KotlinLogging
 
 private class DishOrder(val dishType: DishType, val orderStart: Long)
 
@@ -24,6 +25,7 @@ class CookedDish(dishType: DishType, val startTime: Long) {
 class PlatedDish(val dish: Dish, val platedAt: Long)
 
 private class Station(val context: Context, val name: String, val dishes: List<DishType>, val capacity: Int) {
+    private val logger = KotlinLogging.logger {}
     private val cooking = mutableListOf<CookedDish>()
     private val waiting = ArrayDeque<DishOrder>()
 
@@ -43,7 +45,7 @@ private class Station(val context: Context, val name: String, val dishes: List<D
         }
 
         if (platedDishes.isNotEmpty()) {
-            println("Station $name: Plated dishes: ${platedDishes.map { it.dish.dishType.name }}")
+            logger.info { "Station $name: Plated dishes: ${platedDishes.map { it.dish.dishType.name }}" }
         }
 
         while (waiting.isNotEmpty() && hasCapacity()) {
@@ -56,10 +58,10 @@ private class Station(val context: Context, val name: String, val dishes: List<D
 
     fun fire(dish: DishType) {
         if (hasCapacity()) {
-            println("Station $name: Firing ${dish.name}")
+            logger.info { "Station $name: Firing ${dish.name}" }
             cooking.add(CookedDish(dish, context.clock.time()))
         } else {
-            println("Station $name: ${dish.name} is waiting (station at capacity)")
+            logger.info { "Station $name: ${dish.name} is waiting (station at capacity)" }
             waiting.addLast(DishOrder(dish, context.clock.time()))
         }
     }

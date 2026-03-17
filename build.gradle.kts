@@ -17,6 +17,8 @@ repositories {
 
 dependencies {
     implementation(compose.desktop.currentOs)
+    implementation("io.github.oshai:kotlin-logging-jvm:7.0.0")
+    runtimeOnly("ch.qos.logback:logback-classic:1.5.18")
     testImplementation(kotlin("test"))
 }
 
