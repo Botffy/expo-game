@@ -3,7 +3,7 @@ package hu.sarmin.expo.simulation
 import hu.sarmin.expo.model.Dish
 import hu.sarmin.expo.model.DishType
 import hu.sarmin.expo.model.Menu
-import io.github.oshai.kotlinlogging.KotlinLogging
+import hu.sarmin.expo.util.WithLogging
 
 private class DishOrder(val dishType: DishType, val orderStart: Long)
 
@@ -25,7 +25,8 @@ class CookedDish(dishType: DishType, val startTime: Long) {
 class PlatedDish(val dish: Dish, val platedAt: Long)
 
 private class Station(val context: Context, val name: String, val dishes: List<DishType>, val capacity: Int) {
-    private val logger = KotlinLogging.logger {}
+    companion object : WithLogging()
+
     private val cooking = mutableListOf<CookedDish>()
     private val waiting = ArrayDeque<DishOrder>()
 
