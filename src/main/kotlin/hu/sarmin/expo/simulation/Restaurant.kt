@@ -20,4 +20,13 @@ class Restaurant {
             .addStation("Salad", listOf(caesarSalad), 1)
             .build()
     }
+
+    fun fire(dish: DishType) = kitchen.fire(dish)
+
+    fun update() = kitchen.update()
+
+    fun dish(name: String): DishType {
+        return menu.dishes.find { it.name == name }
+            ?: throw IllegalArgumentException("Unknown dish: $name")
+    }
 }
