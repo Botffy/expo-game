@@ -8,7 +8,7 @@ val STEAK  = DishType("Steak")
 val SALAD  = DishType("Caesar Salad")
 val MENU   = Menu(setOf(PASTA, STEAK, SALAD))
 
-fun createContext() = Context(Clock())
+fun createContext() = Context(Clock(), SimRandom(19820526L))
 
 fun testKitchen(ctx: Context, pastaCapacity: Int = 2, grillCapacity: Int = 1) =
     Kitchen.Builder(ctx, MENU)

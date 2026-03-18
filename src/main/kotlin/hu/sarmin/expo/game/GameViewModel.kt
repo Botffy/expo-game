@@ -3,6 +3,7 @@ package hu.sarmin.expo.game
 import hu.sarmin.expo.simulation.Clock
 import hu.sarmin.expo.simulation.Context
 import hu.sarmin.expo.simulation.Restaurant
+import hu.sarmin.expo.simulation.SimRandom
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -11,6 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 import kotlin.time.TimeSource
 import kotlin.time.measureTime
 
@@ -22,7 +24,7 @@ private const val MAX_PLATED_LOG = 50
 
 class GameViewModel(scope: CoroutineScope, private val config: GameConfig = GameConfig()) {
 
-    private val context = Context(Clock())
+    private val context = Context(Clock(), SimRandom(Random.Default.nextLong()))
     private val restaurant = Restaurant(context)
 
     private val _state = MutableStateFlow(GameSnapshot())
